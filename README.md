@@ -1,9 +1,9 @@
 
-# Aplikasi Cek Nomor Genap Ganjil
+# Aplikasi Perhitungan Diskon
 
-Sebuah aplikasi yang dapat digunakan untuk mengecek angka genap ganjil dan juga prima, yang ditujukan untuk menyelesaikan Tugas PBO ke-1.
+Sebuah aplikasi yang dapat digunakan untuk menghitung diskon dari sebuah harga, yang ditujukan untuk menyelesaikan Tugas PBO ke-3.
 
-#### Source Code CekNomorGenapGanjilFrame.java
+#### Source Code PerhitunganDiskonFrame.java
 ```
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,16 +14,15 @@ Sebuah aplikasi yang dapat digunakan untuk mengecek angka genap ganjil dan juga 
  *
  * @author MyBook Z Series
  */
-public class CekNomorGenapGanjilFrame extends javax.swing.JFrame {
+public class PerhitunganDiskonFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form CekNomorGenapGanjilFrame
+     * Creates new form PerhitunganDiskonFrame
      */
-    public CekNomorGenapGanjilFrame() {
+    public PerhitunganDiskonFrame() {
         initComponents();
-        
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,127 +33,287 @@ public class CekNomorGenapGanjilFrame extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jOptionPaneError = new javax.swing.JOptionPane();
-        jOptionPaneHasil = new javax.swing.JOptionPane();
-        jPanel1 = new javax.swing.JPanel();
+        dialogRiwayat = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jOptionPane1 = new javax.swing.JOptionPane();
+        panelUtama = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        fieldAngka = new javax.swing.JTextField();
-        buttonCek = new javax.swing.JButton();
+        fieldHargaAsli = new javax.swing.JTextField();
+        comboDiskon = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        sliderDiskon = new javax.swing.JSlider();
+        hasilAkhir = new javax.swing.JTextField();
+        buttonHitung = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        hasilPenghematan = new javax.swing.JTextField();
+        buttonRiwayat = new javax.swing.JButton();
+        hasilDiskonSlider = new javax.swing.JLabel();
+        fieldKupon = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
-        jOptionPaneError.setBackground(new java.awt.Color(255, 102, 102));
+        dialogRiwayat.getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jOptionPaneHasil.setBackground(new java.awt.Color(204, 255, 204));
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Aplikasi Cek Nomor Genap Ganjil");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(13, 13, 13, 13);
-        jPanel1.add(jLabel1, gridBagConstraints);
-
-        jLabel2.setText("Masukan Angka");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 0);
-        jPanel1.add(jLabel2, gridBagConstraints);
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 200;
+        dialogRiwayat.getContentPane().add(jScrollPane1, gridBagConstraints);
 
-        fieldAngka.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldAngkaFocusGained(evt);
-            }
-        });
-        fieldAngka.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                fieldAngkaKeyTyped(evt);
+        jLabel6.setText("Riwayat Perhitungan");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        dialogRiwayat.getContentPane().add(jLabel6, gridBagConstraints);
+
+        jButton3.setText("Hapus Riwayat");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 100;
-        jPanel1.add(fieldAngka, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 50;
+        dialogRiwayat.getContentPane().add(jButton3, gridBagConstraints);
 
-        buttonCek.setText("Cek");
-        buttonCek.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCekActionPerformed(evt);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        panelUtama.setBackground(new java.awt.Color(153, 204, 255));
+        panelUtama.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelUtama.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
+        jLabel1.setText("Aplikasi Perhitungan Diskon");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(17, 3, 17, 3);
+        panelUtama.add(jLabel1, gridBagConstraints);
+
+        jLabel2.setText("Masukan Harga Asli");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(9, 0, 5, 0);
+        panelUtama.add(jLabel2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        panelUtama.add(fieldHargaAsli, gridBagConstraints);
+
+        comboDiskon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%" }));
+        comboDiskon.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboDiskonItemStateChanged(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(14, 10, 10, 10);
-        jPanel1.add(buttonCek, gridBagConstraints);
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        panelUtama.add(comboDiskon, gridBagConstraints);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        jLabel3.setText("Pilih Persentase Diskon");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(13, 0, 5, 0);
+        panelUtama.add(jLabel3, gridBagConstraints);
+
+        sliderDiskon.setBackground(new java.awt.Color(153, 204, 255));
+        sliderDiskon.setValue(10);
+        sliderDiskon.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderDiskonStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 31, 5, 31);
+        panelUtama.add(sliderDiskon, gridBagConstraints);
+
+        hasilAkhir.setFocusable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(14, 0, 0, 8);
+        panelUtama.add(hasilAkhir, gridBagConstraints);
+
+        buttonHitung.setBackground(new java.awt.Color(255, 255, 255));
+        buttonHitung.setText("Hitung Diskon");
+        buttonHitung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHitungActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 4, 0);
+        panelUtama.add(buttonHitung, gridBagConstraints);
+
+        jLabel4.setText("Harga Akhir");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(14, 8, 0, 0);
+        panelUtama.add(jLabel4, gridBagConstraints);
+
+        jLabel5.setText("Jumlah Penghematan");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(7, 8, 7, 0);
+        panelUtama.add(jLabel5, gridBagConstraints);
+
+        hasilPenghematan.setFocusable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 8);
+        panelUtama.add(hasilPenghematan, gridBagConstraints);
+
+        buttonRiwayat.setBackground(new java.awt.Color(255, 255, 255));
+        buttonRiwayat.setText("Cek Riwayat");
+        buttonRiwayat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRiwayatActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        panelUtama.add(buttonRiwayat, gridBagConstraints);
+
+        hasilDiskonSlider.setText("10%");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 9, 0);
+        panelUtama.add(hasilDiskonSlider, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 100;
+        panelUtama.add(fieldKupon, gridBagConstraints);
+
+        jLabel7.setText("Kupon");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 2, 0);
+        panelUtama.add(jLabel7, gridBagConstraints);
+
+        getContentPane().add(panelUtama, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>                        
 
-    private void fieldAngkaKeyTyped(java.awt.event.KeyEvent evt) {                                    
-        char c = evt.getKeyChar();
-        if (!Character.isDigit(c)) {
-            evt.consume();
-        }
-    }                                   
-
-    private void buttonCekActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void buttonRiwayatActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        dialogRiwayat.setVisible(true);
+        dialogRiwayat.setSize(450, 500);
+    }                                             
+    private int perhitunganCount = 0;
+    private void buttonHitungActionPerformed(java.awt.event.ActionEvent evt) {                                             
         try {
-            // Mengambil input angka dari fieldAngka
-            String input = fieldAngka.getText();
-            int angka = Integer.parseInt(input);
-
-            // Menentukan apakah angka genap atau ganjil
-            String genapGanjil;
-            if (angka % 2 == 0) {
-                genapGanjil = "Genap";
-            } else {
-                genapGanjil = "Ganjil";
+            // Ambil harga asli dari fieldHargaAsli
+            double hargaAsli = Double.parseDouble(fieldHargaAsli.getText());
+            
+            // Ambil nilai diskon dari sliderDiskon (misalnya sliderDiskon.getValue() mengembalikan nilai dalam persen)
+            int diskonPersen = sliderDiskon.getValue();
+            
+            // Cek apakah kupon berisi "Berjuang"
+            String kupon = fieldKupon.getText().trim();
+            if (kupon.equalsIgnoreCase("Berjuang")) {
+                // Jika kupon berisi "Berjuang", beri diskon tambahan 10%
+                diskonPersen += 10;
             }
-
-            // Memeriksa apakah angka prima
-            String prima;
-            if (isPrima(angka)) {
-                prima = "prima";
-            } else {
-                prima = "bukan prima";
-            }
-
-            // Menampilkan hasil
-            jOptionPaneHasil.showMessageDialog(null, 
-                    "Angka: " + angka + "\n" +
-                    "Jenis: " + genapGanjil + "\n" +
-                    "Status: " + prima,
-                    "Hasil", jOptionPaneHasil.INFORMATION_MESSAGE);
+            
+            // Hitung jumlah pengehematan
+            double penghematan = hargaAsli * diskonPersen / 100.0;
+            
+            // Hitung harga setelah diskon
+            double hargaAkhir = hargaAsli - penghematan;
+            
+            // Tampilkan hasil pada field hasilAkhir dan hasilPenghematan
+            hasilAkhir.setText(String.format("%.2f", hargaAkhir));  // Format 2 desimal
+            hasilPenghematan.setText(String.format("%.2f", penghematan));  // Format 2 desimal            
+            
+            // Mencatat riwayat perhitungan di JTextArea1
+            perhitunganCount++;  // Increment nomor urut perhitungan
+             // Menambahkan riwayat ke jTextArea1
+            String riwayat = String.format("Perhitungan #%d: Harga Asli: %.2f, Diskon: %d%%, Kupon: %s, Harga Akhir: %.2f, Penghematan: %.2f%n", 
+                                           perhitunganCount, hargaAsli, diskonPersen, kupon, hargaAkhir, penghematan);
+            jTextArea1.append(riwayat);  // Menambahkan riwayat ke JTextArea1
         } catch (NumberFormatException ex) {
-            // Menangani error jika input bukan angka
-            jOptionPaneError.showMessageDialog(null,
-                    "Input tidak valid!.",
-                    "Error", jOptionPaneError.ERROR_MESSAGE);
+            jOptionPane1.showMessageDialog(null, "Input harga asli tidak valid!", "Error", jOptionPane1.ERROR_MESSAGE);
+        } catch (Exception e) {
+            // Tangani kesalahan lainnya secara umum
+            jOptionPane1.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage(), 
+                                          "Kesalahan Sistem", jOptionPane1.ERROR_MESSAGE);
         }
+    }                                            
+
+    private void sliderDiskonStateChanged(javax.swing.event.ChangeEvent evt) {                                          
+        // Ambil nilai diskon dari sliderDiskon
+        int diskonPersen = sliderDiskon.getValue();
+        
+        // Perbarui label hasilDiskonSlider dengan nilai diskon yang dipilih
+        hasilDiskonSlider.setText(diskonPersen + "%");
     }                                         
 
-    private void fieldAngkaFocusGained(java.awt.event.FocusEvent evt) {                                       
-        fieldAngka.setText("");
-    }                                      
-
-    // Fungsi untuk memeriksa apakah suatu angka prima
-    public static boolean isPrima(int angka) {
-        if (angka <= 1) return false; // Bilangan kurang dari 2 bukan prima
-        for (int i = 2; i <= Math.sqrt(angka); i++) {
-            if (angka % i == 0) {
-                return false; // Jika dapat dibagi, berarti bukan prima
-            }
+    private void comboDiskonItemStateChanged(java.awt.event.ItemEvent evt) {                                             
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            // Ambil nilai diskon yang dipilih dari comboDiskon
+            String selectedDiskon = (String) comboDiskon.getSelectedItem();
+            
+            // Konversi nilai diskon yang dipilih menjadi integer (misalnya "10%" menjadi 10)
+            int diskonPersen = Integer.parseInt(selectedDiskon.replace("%", "").trim());
+            
+            // Set nilai sliderDiskon dengan diskonPersen yang baru
+            sliderDiskon.setValue(diskonPersen);
         }
-        return true; // Jika tidak ada pembagi selain 1 dan angka itu sendiri
-    }
-    
+    }                                            
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        jTextArea1.setText("");
+    }                                        
+
     /**
      * @param args the command line arguments
      */
@@ -172,45 +331,61 @@ public class CekNomorGenapGanjilFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CekNomorGenapGanjilFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerhitunganDiskonFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CekNomorGenapGanjilFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerhitunganDiskonFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CekNomorGenapGanjilFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerhitunganDiskonFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CekNomorGenapGanjilFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerhitunganDiskonFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CekNomorGenapGanjilFrame().setVisible(true);
+                new PerhitunganDiskonFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton buttonCek;
-    private javax.swing.JTextField fieldAngka;
+    private javax.swing.JButton buttonHitung;
+    private javax.swing.JButton buttonRiwayat;
+    private javax.swing.JComboBox<String> comboDiskon;
+    private javax.swing.JDialog dialogRiwayat;
+    private javax.swing.JTextField fieldHargaAsli;
+    private javax.swing.JTextField fieldKupon;
+    private javax.swing.JTextField hasilAkhir;
+    private javax.swing.JLabel hasilDiskonSlider;
+    private javax.swing.JTextField hasilPenghematan;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JOptionPane jOptionPaneError;
-    private javax.swing.JOptionPane jOptionPaneHasil;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JOptionPane jOptionPane1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JPanel panelUtama;
+    private javax.swing.JSlider sliderDiskon;
     // End of variables declaration                   
 }
 ```
 ## Fitur Utama
-- Mencek Ganjil Genap Suatu Angka
-- Membatasi Input Hanya Angka
+- Menghitung Diskon dan Jumlah Penghematan
+- Penanganan Eksepsi
 
 ## Fitur Tambahan (Variasi)
-- Pemeriksaan Bilangan Prima
-- JOptionPane Untuk Hasil dan Error
+- Fitur Kupon ("Berjuang") untuk mendapatkan diskon tambahan 10%
+- Slider sebagai alternatif pemilihan diskon
+- Riwayat Perhitungan Diskon
 ## Referensi
 
- - [Modul PBO2 Tugas 1](https://drive.google.com/file/d/10ywJ-nxZMnQFSehVTw9HdCJO2yvsFIBS/view)
+ - [Modul PBO2 Tugas 3](https://drive.google.com/file/d/1142tmuIMPH-T0PHFhoWhXhbNw6-9QVpc/view)
 
 
 ## Biodata Pembuat
