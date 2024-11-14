@@ -14,8 +14,9 @@ public class CekNomorGenapGanjilFrame extends javax.swing.JFrame {
      */
     public CekNomorGenapGanjilFrame() {
         initComponents();
+        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,11 +27,17 @@ public class CekNomorGenapGanjilFrame extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jOptionPaneError = new javax.swing.JOptionPane();
+        jOptionPaneHasil = new javax.swing.JOptionPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         fieldAngka = new javax.swing.JTextField();
         buttonCek = new javax.swing.JButton();
+
+        jOptionPaneError.setBackground(new java.awt.Color(255, 102, 102));
+
+        jOptionPaneHasil.setBackground(new java.awt.Color(204, 255, 204));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,6 +57,11 @@ public class CekNomorGenapGanjilFrame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 0);
         jPanel1.add(jLabel2, gridBagConstraints);
 
+        fieldAngka.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldAngkaFocusGained(evt);
+            }
+        });
         fieldAngka.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 fieldAngkaKeyTyped(evt);
@@ -62,6 +74,11 @@ public class CekNomorGenapGanjilFrame extends javax.swing.JFrame {
         jPanel1.add(fieldAngka, gridBagConstraints);
 
         buttonCek.setText("Cek");
+        buttonCek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCekActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -74,9 +91,63 @@ public class CekNomorGenapGanjilFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fieldAngkaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldAngkaKeyTyped
-
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_fieldAngkaKeyTyped
 
+    private void buttonCekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCekActionPerformed
+        try {
+            // Mengambil input angka dari fieldAngka
+            String input = fieldAngka.getText();
+            int angka = Integer.parseInt(input);
+
+            // Menentukan apakah angka genap atau ganjil
+            String genapGanjil;
+            if (angka % 2 == 0) {
+                genapGanjil = "Genap";
+            } else {
+                genapGanjil = "Ganjil";
+            }
+
+            // Memeriksa apakah angka prima
+            String prima;
+            if (isPrima(angka)) {
+                prima = "prima";
+            } else {
+                prima = "bukan prima";
+            }
+
+            // Menampilkan hasil
+            jOptionPaneHasil.showMessageDialog(null, 
+                    "Angka: " + angka + "\n" +
+                    "Jenis: " + genapGanjil + "\n" +
+                    "Status: " + prima,
+                    "Hasil", jOptionPaneHasil.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            // Menangani error jika input bukan angka
+            jOptionPaneError.showMessageDialog(null,
+                    "Input tidak valid!.",
+                    "Error", jOptionPaneError.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonCekActionPerformed
+
+    private void fieldAngkaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldAngkaFocusGained
+        fieldAngka.setText("");
+    }//GEN-LAST:event_fieldAngkaFocusGained
+
+    // Fungsi untuk memeriksa apakah suatu angka prima
+    public static boolean isPrima(int angka) {
+        if (angka <= 1) return false; // Bilangan kurang dari 2 bukan prima
+        for (int i = 2; i <= Math.sqrt(angka); i++) {
+            if (angka % i == 0) {
+                return false; // Jika dapat dibagi, berarti bukan prima
+            }
+        }
+        return true; // Jika tidak ada pembagi selain 1 dan angka itu sendiri
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -117,6 +188,8 @@ public class CekNomorGenapGanjilFrame extends javax.swing.JFrame {
     private javax.swing.JTextField fieldAngka;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JOptionPane jOptionPaneError;
+    private javax.swing.JOptionPane jOptionPaneHasil;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
